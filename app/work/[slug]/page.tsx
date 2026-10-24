@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Arrow } from "@/components/arrow";
 import { EscrowDiagram } from "@/components/escrow-diagram";
+import { Glyph } from "@/components/glyph";
 import { PaymentsDiagram } from "@/components/payments-diagram";
 import { WORK } from "@/lib/content";
 
@@ -20,7 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="reveal mt-12">
-      <h2 className="label mb-4">{title}</h2>
+      <h2 className="label mb-4 flex items-center gap-2.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" aria-hidden="true" />
+        {title}
+      </h2>
       {children}
     </section>
   );
@@ -46,31 +50,33 @@ export default async function CaseStudyPage({ params }: Props) {
   const next = WORK[(i + 1) % WORK.length];
 
   return (
-    <article className="pt-12 sm:pt-16">
+    <article className="case relative pt-12 sm:pt-16" style={{ "--tone": w.tone } as React.CSSProperties}>
+      <div className="case-glow" aria-hidden="true" />
       <Link href="/#work" className="label inline-flex items-center gap-1.5 hover:text-accent">
         <Arrow dir="left" />
         All work
       </Link>
 
       <header className="reveal mt-8">
-        <p className="label">
-          {w.org} · {w.when}
-        </p>
+        <div className="flex items-center gap-3">
+          <Glyph name={w.glyph} tone={w.tone} size={44} />
+          <p className="label">
+            {w.org} · {w.when}
+          </p>
+        </div>
         <h1 className="mt-3 text-[32px] leading-[1.1] font-semibold tracking-[-0.025em] sm:text-[42px]">{w.title}</h1>
         <p className="mt-4 text-[18px] leading-relaxed text-muted">{w.blurb}</p>
-        <dl className="mt-8 grid gap-x-8 gap-y-4 border-y border-line py-5 text-[14px] sm:grid-cols-3">
-          <div>
+        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
+          <div className="bg-surface px-4 py-3.5">
             <dt className="label">Role</dt>
-            <dd className="mt-1">{w.role}</dd>
+            <dd className="mt-1 text-[14px]">{w.role}</dd>
           </div>
-          <div>
-            <dt className="label">When</dt>
-            <dd className="mt-1">{w.when}</dd>
-          </div>
-          <div>
-            <dt className="label">Scale</dt>
-            <dd className="mt-1">{w.figures[0]}</dd>
-          </div>
+          {w.figures.map((f) => (
+            <div key={f} className="bg-surface px-4 py-3.5">
+              <dt className="sr-only">Figure</dt>
+              <dd className="tone-text text-[14px] font-medium">{f}</dd>
+            </div>
+          ))}
         </dl>
       </header>
 
@@ -117,7 +123,7 @@ export default async function CaseStudyPage({ params }: Props) {
       <Block title="Stack">
         <ul className="flex flex-wrap gap-1.5">
           {w.stack.map((s) => (
-            <li key={s} className="figure">
+            <li key={s} className="figure figure-tone">
               {s}
             </li>
           ))}

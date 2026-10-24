@@ -114,3 +114,200 @@ a {
     transition: none;
   }
 }
+
+/* ---- color: a glow behind the top, and each project in its own tone ---- */
+
+/* behind the hero: soft blue, violet, and teal light, over a faint dot grid that fades out */
+.page-glow {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 640px;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.page-glow::before {
+  content: "";
+  position: absolute;
+  inset: -120px -10% 0 -10%;
+  background:
+    radial-gradient(38% 55% at 22% 30%, color-mix(in srgb, #3b6cf6 22%, transparent), transparent 70%),
+    radial-gradient(34% 50% at 72% 18%, color-mix(in srgb, #8b5cf6 18%, transparent), transparent 70%),
+    radial-gradient(30% 45% at 58% 62%, color-mix(in srgb, #10b981 12%, transparent), transparent 70%);
+  filter: blur(10px);
+  animation: glow-drift 22s ease-in-out infinite alternate;
+}
+.page-glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 85%);
+  opacity: 0.5;
+}
+@keyframes glow-drift {
+  to {
+    transform: translate3d(3%, 4%, 0) scale(1.06);
+  }
+}
+
+/* "systems that move money" */
+.ink-gradient {
+  background: linear-gradient(100deg, var(--accent), #8b5cf6 55%, #10b981);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* open to co-ops: a green dot that breathes */
+.status-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: #22c55e;
+  opacity: 0.35;
+  animation: breathe 2.4s ease-in-out infinite;
+}
+@keyframes breathe {
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* a tone set inline (--tone); lifted toward white in dark mode so it reads on the dark page */
+.stat,
+.tone-text {
+  color: var(--tone-ink);
+}
+.stat,
+.tone-text,
+.tone-tile,
+.figure-tone,
+.work-card,
+.case {
+  --tone-ink: color-mix(in oklab, var(--tone, var(--accent)) 88%, black);
+}
+:root[data-theme="dark"] :is(.stat, .tone-text, .tone-tile, .figure-tone, .work-card, .case) {
+  --tone-ink: color-mix(in oklab, var(--tone, var(--accent)) 72%, white);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) :is(.stat, .tone-text, .tone-tile, .figure-tone, .work-card, .case) {
+    --tone-ink: color-mix(in oklab, var(--tone, var(--accent)) 72%, white);
+  }
+}
+.tone-tile {
+  color: var(--tone-ink);
+  background: color-mix(in srgb, var(--tone) 13%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 28%, transparent);
+}
+.figure-tone {
+  color: var(--tone-ink);
+  border-color: color-mix(in srgb, var(--tone) 32%, var(--line));
+  background: color-mix(in srgb, var(--tone) 7%, transparent);
+}
+.work-card {
+  position: relative;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+.work-card::before {
+  /* a thin line of the project's color along the top */
+  content: "";
+  position: absolute;
+  inset: 0 18px auto 18px;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(90deg, transparent, var(--tone), transparent);
+  opacity: 0.7;
+}
+.work-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--tone) 45%, var(--line));
+  box-shadow: 0 14px 40px -18px color-mix(in srgb, var(--tone) 55%, transparent);
+}
+
+.chip {
+  font-size: 13.5px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 3px 9px;
+}
+
+/* the experience timeline: a line down the left with a dot at each role */
+.timeline {
+  position: relative;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--line) 70%);
+}
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent);
+}
+
+/* the contact card: a soft gradient with a hairline border of light */
+.contact-card {
+  background:
+    radial-gradient(60% 90% at 0% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%),
+    radial-gradient(50% 80% at 100% 100%, color-mix(in srgb, #8b5cf6 12%, transparent), transparent 70%),
+    var(--surface);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+}
+
+/* a case study takes its project's color as the page accent */
+.case {
+  --accent: var(--tone-ink);
+  --accent-soft: color-mix(in srgb, var(--tone) 10%, transparent);
+}
+.case-glow {
+  /* starts above the article and fades out before every edge, so it never shows a line */
+  position: absolute;
+  top: -220px;
+  left: -25%;
+  right: -25%;
+  height: 760px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side at 40% 50%,
+    color-mix(in srgb, var(--tone) 20%, transparent),
+    transparent
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-glow::before,
+  .status-dot::after {
+    animation: none;
+  }
+  .work-card:hover {
+    transform: none;
+  }
+}

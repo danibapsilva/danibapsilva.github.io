@@ -1,6 +1,7 @@
 // Everything the site says, in one place. Facts come from Daniel's resume; keep them that way.
 
 export type Diagram = "payments" | "escrow";
+export type Glyph = "card" | "shield" | "store" | "orbit";
 
 export type CaseStudy = {
   slug: string;
@@ -20,6 +21,9 @@ export type CaseStudy = {
   built: string[];
   results: string[];
   diagram?: Diagram;
+  /** The project's color: its icon, figures, and its page's accent. */
+  tone: string;
+  glyph: Glyph;
   /** A note shown above the write-up (proprietary work, a demo on the way). */
   note?: string;
 };
@@ -45,11 +49,23 @@ export const PERSON = {
     email: "silva.d4@northeastern.edu",
     resume: "/resume.pdf",
   },
+  /** What recruiters should know first. */
+  status: "Open to Summer B to Fall 2027 co-ops",
 };
+
+/** The headline numbers, from the work below. */
+export const STATS = [
+  { value: "$1M+", label: "secured in crypto escrow", tone: "#10b981" },
+  { value: "15,000+", label: "marketplace users", tone: "#f59e0b" },
+  { value: "50M+", label: "transactions a day, engine target", tone: "#3b6cf6" },
+  { value: "4", label: "card networks integrated", tone: "#8b5cf6" },
+];
 
 export const WORK: CaseStudy[] = [
   {
     slug: "payment-engine",
+    tone: "#3b6cf6",
+    glyph: "card",
     title: "ISO 8583 payment processing engine",
     blurb: "Real-time authorization and batch clearing for four card networks, built from scratch in Java 21.",
     role: "Software Engineering Intern",
@@ -81,6 +97,8 @@ export const WORK: CaseStudy[] = [
   },
   {
     slug: "escrow",
+    tone: "#10b981",
+    glyph: "shield",
     title: "Autonomous escrow and blockchain platform",
     blurb: "Automated crypto escrow for online communities: $1M+ secured for 10,000+ users.",
     role: "Founder and full-stack developer",
@@ -108,6 +126,8 @@ export const WORK: CaseStudy[] = [
   },
   {
     slug: "brawlmart",
+    tone: "#f59e0b",
+    glyph: "store",
     title: "BrawlMart digital marketplace",
     blurb: "A marketplace for in-game services on the web and Discord, with Stripe payments and automated delivery.",
     role: "Founder and operator",
@@ -131,6 +151,8 @@ export const WORK: CaseStudy[] = [
   },
   {
     slug: "orbit",
+    tone: "#8b5cf6",
+    glyph: "orbit",
     title: "Orbit",
     blurb: "My own phone app: school, job search, and money in one place, run by a pipeline on AWS.",
     role: "Personal project",
@@ -188,8 +210,8 @@ export const EXPERIENCE: Job[] = [
 ];
 
 export const SKILLS = [
-  { label: "Languages", items: "Java, Python, C++, C#, TypeScript, JavaScript, SQL, x86/x64 assembly" },
-  { label: "Frameworks", items: "React, Next.js, Node.js, Express, Tailwind, Discord.py" },
-  { label: "Data and cloud", items: "MySQL, MongoDB, Redis, AWS (EC2, S3), Firebase" },
-  { label: "Systems", items: "Windows internals, reverse engineering (Ghidra, IDA Pro, x64dbg), Linux, Docker" },
+  { label: "Languages", items: ["Java", "Python", "C++", "C#", "TypeScript", "JavaScript", "SQL", "x86/x64 assembly"] },
+  { label: "Frameworks", items: ["React", "Next.js", "Node.js", "Express", "Tailwind", "Discord.py"] },
+  { label: "Data and cloud", items: ["MySQL", "MongoDB", "Redis", "AWS (EC2, S3)", "Firebase"] },
+  { label: "Systems", items: ["Windows internals", "Reverse engineering (Ghidra, IDA Pro, x64dbg)", "Linux", "Docker"] },
 ];

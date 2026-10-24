@@ -4,3 +4,6 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 .DS_Store
+
+# the original resume has a phone number; the site serves public/resume.pdf (redacted)
+public/Daniel_Silva_Resume_*.pdf

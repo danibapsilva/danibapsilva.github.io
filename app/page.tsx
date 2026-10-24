@@ -1,63 +1,92 @@
 import Link from "next/link";
 import { Arrow } from "@/components/arrow";
-import { EXPERIENCE, PERSON, SKILLS, WORK } from "@/lib/content";
+import { Glyph } from "@/components/glyph";
+import { SectionLabel } from "@/components/section-label";
+import { EXPERIENCE, PERSON, SKILLS, STATS, WORK } from "@/lib/content";
 
 const LINKS = [
   { label: "GitHub", href: PERSON.links.github },
   { label: "LinkedIn", href: PERSON.links.linkedin },
   { label: "Email", href: `mailto:${PERSON.links.email}` },
-  { label: "Resume", href: PERSON.links.resume },
 ];
 
 export default function Home() {
   return (
     <>
-      <section className="reveal pt-16 pb-14 sm:pt-24 sm:pb-20">
-        <p className="label">
-          {PERSON.place} · {PERSON.degree}
+      <section className="reveal pt-14 pb-12 sm:pt-20 sm:pb-16">
+        <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1 text-[13px] text-muted backdrop-blur">
+          <span className="status-dot" aria-hidden="true" />
+          {PERSON.status}
         </p>
-        <h1 className="mt-4 text-[40px] leading-[1.05] font-semibold tracking-[-0.03em] sm:text-[52px]">
+        <h1 className="mt-6 text-[42px] leading-[1.04] font-semibold tracking-[-0.035em] sm:text-[58px]">
           {PERSON.name}
         </h1>
-        <p className="mt-5 max-w-[34rem] text-[18px] leading-relaxed text-muted sm:text-[19px]">{PERSON.intro}</p>
-        <ul className="mt-8 flex flex-wrap gap-2">
+        <p className="mt-5 max-w-[36rem] text-[18px] leading-relaxed text-muted sm:text-[20px]">
+          Computer science at Northeastern University. I build{" "}
+          <span className="ink-gradient font-medium">systems that move money</span>: payment engines, escrow, and
+          marketplaces.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center gap-2">
+          <a
+            href={PERSON.links.resume}
+            className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-4.5 py-2.5 text-[14px] font-medium text-bg transition-transform hover:-translate-y-0.5"
+          >
+            Resume
+            <Arrow className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
           {LINKS.map((l) => (
-            <li key={l.label}>
-              <a
-                href={l.href}
-                className="group inline-flex items-center gap-1.5 rounded-full border border-line px-4 py-2 text-[14px] transition-colors hover:border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] hover:text-accent"
-              >
-                {l.label}
-                <Arrow className="text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
-              </a>
-            </li>
+            <a
+              key={l.label}
+              href={l.href}
+              className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/60 px-4 py-2.5 text-[14px] backdrop-blur transition-colors hover:border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] hover:text-accent"
+            >
+              {l.label}
+              <Arrow className="text-faint transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent" />
+            </a>
           ))}
-        </ul>
+        </div>
+
+        <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-4">
+          {STATS.map((s) => (
+            <div key={s.label} className="bg-surface px-4 py-4">
+              <dt className="sr-only">{s.label}</dt>
+              <dd>
+                <span className="stat block text-[26px] font-semibold tracking-[-0.03em]" style={{ "--tone": s.tone } as React.CSSProperties}>
+                  {s.value}
+                </span>
+                <span className="mt-0.5 block text-[12.5px] leading-snug text-muted">{s.label}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       <section id="work" className="scroll-mt-8 py-10">
-        <h2 className="label reveal mb-6">Selected work</h2>
-        <ul className="divide-y divide-line border-y border-line">
+        <SectionLabel n="01">Selected work</SectionLabel>
+        <ul className="grid gap-3 sm:grid-cols-2">
           {WORK.map((w) => (
             <li key={w.slug} className="reveal">
               <Link
                 href={`/work/${w.slug}/`}
-                className="group -mx-3 grid gap-2 rounded-xl px-3 py-6 transition-colors hover:bg-[var(--accent-soft)] sm:grid-cols-[5.5rem_1fr]"
+                className="work-card group flex h-full flex-col rounded-2xl border border-line bg-surface p-5"
+                style={{ "--tone": w.tone } as React.CSSProperties}
               >
-                <span className="label pt-1">{w.kind}</span>
-                <span>
-                  <span className="flex items-baseline justify-between gap-4">
-                    <span className="text-[18px] font-medium tracking-[-0.01em] group-hover:text-accent">{w.title}</span>
-                    <Arrow dir="right" className="text-faint transition-transform group-hover:translate-x-1 group-hover:text-accent" />
-                  </span>
-                  <span className="mt-1.5 block text-[15px] leading-relaxed text-muted">{w.blurb}</span>
-                  <span className="mt-3 flex flex-wrap gap-1.5">
-                    {w.figures.map((f) => (
-                      <span key={f} className="figure">
-                        {f}
-                      </span>
-                    ))}
-                  </span>
+                <span className="flex items-start justify-between gap-3">
+                  <Glyph name={w.glyph} tone={w.tone} />
+                  <span className="label rounded-full border border-line px-2 py-0.5">{w.kind}</span>
+                </span>
+                <span className="mt-4 text-[17px] leading-snug font-medium tracking-[-0.01em]">{w.title}</span>
+                <span className="mt-1.5 block flex-1 text-[14.5px] leading-relaxed text-muted">{w.blurb}</span>
+                <span className="mt-4 flex flex-wrap gap-1.5">
+                  {w.figures.slice(0, 2).map((f) => (
+                    <span key={f} className="figure figure-tone">
+                      {f}
+                    </span>
+                  ))}
+                </span>
+                <span className="tone-text mt-4 inline-flex items-center gap-1.5 text-[13.5px] font-medium">
+                  Read the case study
+                  <Arrow dir="right" className="transition-transform group-hover:translate-x-1" />
                 </span>
               </Link>
             </li>
@@ -66,52 +95,83 @@ export default function Home() {
       </section>
 
       <section id="experience" className="scroll-mt-8 py-10">
-        <h2 className="label reveal mb-6">Experience</h2>
-        <ol className="space-y-10">
+        <SectionLabel n="02">Experience</SectionLabel>
+        <ol className="timeline space-y-10">
           {EXPERIENCE.map((j) => (
-            <li key={j.org} className="reveal grid gap-2 sm:grid-cols-[4.5rem_1fr]">
-              <span className="label pt-1">{j.when.split(" ").slice(-1)[0]}</span>
-              <div>
-                <h3 className="text-[17px] font-medium tracking-[-0.01em]">
-                  {j.role}, <span className="text-muted">{j.org}</span>
-                </h3>
-                <p className="label mt-1">
-                  {j.when} · {j.where}
-                </p>
-                <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-muted">
-                  {j.points.map((p) => (
-                    <li key={p} className="relative pl-4 before:absolute before:top-[0.7em] before:left-0 before:h-px before:w-2 before:bg-faint">
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <li key={j.org} className="reveal relative pl-7">
+              <span className="timeline-dot" aria-hidden="true" />
+              <p className="label">
+                {j.when} · {j.where}
+              </p>
+              <h3 className="mt-1.5 text-[17px] font-medium tracking-[-0.01em]">
+                {j.role}, <span className="text-muted">{j.org}</span>
+              </h3>
+              <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-muted">
+                {j.points.map((p) => (
+                  <li
+                    key={p}
+                    className="relative pl-4 before:absolute before:top-[0.7em] before:left-0 before:h-px before:w-2 before:bg-faint"
+                  >
+                    {p}
+                  </li>
+                ))}
+              </ul>
             </li>
           ))}
+          <li className="reveal relative pl-7">
+            <span className="timeline-dot" aria-hidden="true" />
+            <p className="label">Expected April 2029 · Boston, MA</p>
+            <h3 className="mt-1.5 text-[17px] font-medium tracking-[-0.01em]">
+              B.S. Computer Science, <span className="text-muted">{PERSON.school}</span>
+            </h3>
+          </li>
         </ol>
       </section>
 
-      <section className="reveal py-10">
-        <h2 className="label mb-6">Education</h2>
-        <div className="grid gap-2 sm:grid-cols-[4.5rem_1fr]">
-          <span className="label pt-1">2029</span>
-          <div>
-            <h3 className="text-[17px] font-medium tracking-[-0.01em]">{PERSON.school}</h3>
-            <p className="mt-1 text-[15px] text-muted">{PERSON.degree}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="reveal py-10">
-        <h2 className="label mb-6">Tools I use</h2>
-        <dl className="space-y-3 text-[15px]">
+      <section className="py-10">
+        <SectionLabel n="03">Tools I use</SectionLabel>
+        <dl className="reveal space-y-4">
           {SKILLS.map((s) => (
-            <div key={s.label} className="grid gap-1 sm:grid-cols-[8.5rem_1fr]">
-              <dt className="text-faint">{s.label}</dt>
-              <dd className="text-muted">{s.items}</dd>
+            <div key={s.label} className="grid gap-2 sm:grid-cols-[8.5rem_1fr]">
+              <dt className="pt-1 text-[14px] text-faint">{s.label}</dt>
+              <dd className="flex flex-wrap gap-1.5">
+                {s.items.map((item) => (
+                  <span key={item} className="chip">
+                    {item}
+                  </span>
+                ))}
+              </dd>
             </div>
           ))}
         </dl>
+      </section>
+
+      <section className="reveal py-10">
+        <div className="contact-card rounded-3xl p-7 sm:p-9">
+          <p className="label">Get in touch</p>
+          <h2 className="mt-3 text-[26px] leading-tight font-semibold tracking-[-0.025em] sm:text-[30px]">
+            Building something that moves money, or needs to?
+          </h2>
+          <p className="mt-3 max-w-[32rem] text-[15.5px] leading-relaxed text-muted">
+            I&apos;m looking for a software engineering co-op from July to December 2027. I&apos;d love to hear about
+            your team.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-2">
+            <a
+              href={`mailto:${PERSON.links.email}`}
+              className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4.5 py-2.5 text-[14px] font-medium text-bg transition-transform hover:-translate-y-0.5"
+            >
+              {PERSON.links.email}
+            </a>
+            <a
+              href={PERSON.links.linkedin}
+              className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-4 py-2.5 text-[14px] hover:text-accent"
+            >
+              LinkedIn
+              <Arrow className="text-faint group-hover:text-accent" />
+            </a>
+          </div>
+        </div>
       </section>
     </>
   );
