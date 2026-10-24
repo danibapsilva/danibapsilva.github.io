@@ -2,12 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Arrow } from "@/components/arrow";
+import { BrawlmartDiagram } from "@/components/brawlmart-diagram";
 import { EscrowDiagram } from "@/components/escrow-diagram";
 import { Glyph } from "@/components/glyph";
+import { OrbitDiagram } from "@/components/orbit-diagram";
 import { PaymentsDiagram } from "@/components/payments-diagram";
-import { WORK } from "@/lib/content";
+import { PhoneGallery } from "@/components/phone-gallery";
+import { type Diagram, WORK } from "@/lib/content";
 
 type Props = { params: Promise<{ slug: string }> };
+
+const DIAGRAMS: Record<Diagram, { render: () => React.ReactNode; caption: string }> = {
+  payments: {
+    render: () => <PaymentsDiagram />,
+    caption: "Authorization runs as a pipeline of stages; clearing and settlement run in batches.",
+  },
+  escrow: {
+    render: () => <EscrowDiagram />,
+    caption: "Every deal moves through the same steps, checked on-chain and logged.",
+  },
+  brawlmart: {
+    render: () => <BrawlmartDiagram />,
+    caption: "Two storefronts, one order flow: paid through Stripe, then delivered automatically.",
+  },
+  orbit: {
+    render: () => <OrbitDiagram />,
+    caption: "Every source flows through one pipeline into the vault; the phone app reads the vault.",
+  },
+};
 
 export const dynamicParams = false;
 export const generateStaticParams = () => WORK.map((w) => ({ slug: w.slug }));
@@ -132,14 +154,11 @@ export default async function CaseStudyPage({ params }: Props) {
         </div>
         {w.diagram && (
           <figure className="-mx-2 mt-8 overflow-hidden rounded-2xl border border-line bg-surface px-1.5 py-4 sm:mx-0 sm:p-6">
-            {w.diagram === "payments" ? <PaymentsDiagram /> : <EscrowDiagram />}
-            <figcaption className="label mt-4 px-2.5 sm:px-0">
-              {w.diagram === "payments"
-                ? "Authorization runs as a pipeline of stages; clearing and settlement run in batches."
-                : "Every deal moves through the same steps, checked on-chain and logged."}
-            </figcaption>
+            {DIAGRAMS[w.diagram].render()}
+            <figcaption className="label mt-4 px-2.5 sm:px-0">{DIAGRAMS[w.diagram].caption}</figcaption>
           </figure>
         )}
+        {w.gallery && <PhoneGallery shots={w.gallery} caption="Screens with sample data" />}
       </Block>
 
       <Block title="What I built">

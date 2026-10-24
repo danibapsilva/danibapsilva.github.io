@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Arrow } from "@/components/arrow";
+import { ExperienceItem } from "@/components/experience-item";
 import { Glyph } from "@/components/glyph";
 import { SectionLabel } from "@/components/section-label";
 import { SkillsMarquee } from "@/components/skills-marquee";
@@ -107,25 +108,7 @@ export default function Home() {
         <SectionLabel n="02">Experience</SectionLabel>
         <ol className="timeline space-y-10">
           {EXPERIENCE.map((j) => (
-            <li key={j.org} className="reveal relative pl-7">
-              <span className="timeline-dot" aria-hidden="true" />
-              <p className="label">
-                {j.when} · {j.where}
-              </p>
-              <h3 className="mt-1.5 text-[17px] font-medium tracking-[-0.01em]">
-                {j.role}, <span className="text-muted">{j.org}</span>
-              </h3>
-              <ul className="mt-3 space-y-2 text-[15px] leading-relaxed text-muted">
-                {j.points.map((p) => (
-                  <li
-                    key={p}
-                    className="relative pl-4 before:absolute before:top-[0.7em] before:left-0 before:h-px before:w-2 before:bg-faint"
-                  >
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </li>
+            <ExperienceItem key={j.org} job={j} />
           ))}
           <li className="reveal relative pl-7">
             <span className="timeline-dot" aria-hidden="true" />

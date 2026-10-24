@@ -673,3 +673,49 @@ a {
     transition: none;
   }
 }
+
+/* ---- a disclosure that eases open: rows go from 0fr to 1fr, so no height is ever hard-coded ---- */
+.disclosure {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.35s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.25s ease;
+}
+.disclosure[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.disclosure-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .disclosure {
+    transition: none;
+  }
+}
+
+/* ---- phone frames for screenshots ---- */
+.phone-strip {
+  scrollbar-width: none;
+}
+.phone-strip::-webkit-scrollbar {
+  display: none;
+}
+.phone-frame {
+  border-radius: 26px;
+  padding: 5px;
+  background: color-mix(in srgb, var(--ink) 10%, var(--surface));
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 0.06),
+    0 18px 40px -22px rgb(0 0 0 / 0.45);
+}
+.phone-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 21px;
+}

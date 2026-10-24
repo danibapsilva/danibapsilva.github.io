@@ -1,6 +1,9 @@
 // Everything the site says, in one place. Facts come from Daniel's resume; keep them that way.
 
-export type Diagram = "payments" | "escrow";
+export type Diagram = "payments" | "escrow" | "brawlmart" | "orbit";
+
+/** A screenshot on a case study, shown in a phone frame. */
+export type Shot = { src: string; alt: string; width: number; height: number };
 export type Glyph = "card" | "shield" | "store" | "orbit";
 
 export type CaseStudy = {
@@ -21,6 +24,8 @@ export type CaseStudy = {
   built: string[];
   results: string[];
   diagram?: Diagram;
+  /** Phone screenshots shown under the approach (sample data only). */
+  gallery?: Shot[];
   /** The project's color: its icon, figures, and its page's accent. */
   tone: string;
   glyph: Glyph;
@@ -150,6 +155,7 @@ export const WORK: CaseStudy[] = [
       "The operations behind it, including disputes and customer support.",
     ],
     results: ["15,000+ users across web and Discord."],
+    diagram: "brawlmart",
   },
   {
     slug: "orbit",
@@ -175,6 +181,33 @@ export const WORK: CaseStudy[] = [
       "Money through Plaid, and Claude-powered briefings and news.",
     ],
     results: ["Runs on its own: morning and evening jobs on EC2, plus a sync every few minutes."],
+    diagram: "orbit",
+    gallery: [
+      {
+        src: "/work/orbit/today.webp",
+        alt: "Orbit's Today screen: the week's deadlines as dots, the weather and what to wear, countdowns, today's events, and the day's focus.",
+        width: 600,
+        height: 1298,
+      },
+      {
+        src: "/work/orbit/due.webp",
+        alt: "Orbit's Due screen: a grade card for each class, the hours of work due each day this week, and the assignments by day.",
+        width: 600,
+        height: 1298,
+      },
+      {
+        src: "/work/orbit/countdowns.webp",
+        alt: "Orbit's Countdowns screen: live clocks to upcoming events, each on its own card.",
+        width: 600,
+        height: 1298,
+      },
+      {
+        src: "/work/orbit/news.webp",
+        alt: "Orbit's News screen: a three-line briefing, sections to filter by, and the lead story.",
+        width: 600,
+        height: 1298,
+      },
+    ],
   },
 ];
 
