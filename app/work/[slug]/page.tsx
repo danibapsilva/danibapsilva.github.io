@@ -80,6 +80,36 @@ export default async function CaseStudyPage({ params }: Props) {
         </dl>
       </header>
 
+      {w.demo && (
+        <div className="reveal mt-8 flex flex-col gap-4 rounded-2xl border border-[color-mix(in_srgb,var(--tone)_35%,var(--line))] bg-[var(--accent-soft)] p-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-[15.5px] font-medium">Try it live</p>
+            <p className="mt-1 text-[14px] leading-relaxed text-muted">
+              Holdfast, a public version on the Sepolia test network: run a trade against a bot, with every step a real
+              transaction. No wallet needed.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <Link
+              href={w.demo.href}
+              className="inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-[14px] font-medium text-bg transition-transform hover:-translate-y-0.5"
+            >
+              Open the demo
+              <Arrow dir="right" />
+            </Link>
+            <a
+              href={w.demo.source}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-4 py-2 text-[14px] hover:text-accent"
+            >
+              Source
+              <Arrow className="text-faint group-hover:text-accent" />
+            </a>
+          </div>
+        </div>
+      )}
+
       {w.note && (
         <p className="reveal mt-8 rounded-xl border border-line bg-[var(--accent-soft)] px-4 py-3 text-[14px] leading-relaxed">
           {w.note}

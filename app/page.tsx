@@ -74,7 +74,15 @@ export default function Home() {
               >
                 <span className="flex items-start justify-between gap-3">
                   <Glyph name={w.glyph} tone={w.tone} />
-                  <span className="label rounded-full border border-line px-2 py-0.5">{w.kind}</span>
+                  <span className="flex items-center gap-1.5">
+                    {w.demo && (
+                      <span className="figure figure-tone inline-flex items-center gap-1.5">
+                        <span className="status-dot" aria-hidden="true" />
+                        Live demo
+                      </span>
+                    )}
+                    <span className="label rounded-full border border-line px-2 py-0.5">{w.kind}</span>
+                  </span>
                 </span>
                 <span className="mt-4 text-[17px] leading-snug font-medium tracking-[-0.01em]">{w.title}</span>
                 <span className="mt-1.5 block flex-1 text-[14.5px] leading-relaxed text-muted">{w.blurb}</span>

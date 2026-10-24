@@ -26,6 +26,8 @@ export type CaseStudy = {
   glyph: Glyph;
   /** A note shown above the write-up (proprietary work, a demo on the way). */
   note?: string;
+  /** A live demo on this site, and its public source. */
+  demo?: { href: string; source: string };
 };
 
 export type Job = {
@@ -107,7 +109,7 @@ export const WORK: CaseStudy[] = [
     kind: "Founder",
     stack: ["Python", "Web3.py", "MongoDB", "AWS EC2", "AWS S3", "Discord"],
     figures: ["$1M+ secured", "10,000+ users", "BTC, ETH, USDT and more"],
-    note: "Live demo coming soon: a public version running on crypto testnets, where anyone can try a trade end to end.",
+    demo: { href: "/holdfast/", source: "https://github.com/danibapsilva/holdfast" },
     problem: [
       "Trades between strangers in online communities run on trust, and trust breaks: one side pays and the other disappears. Human middlemen help, but they're slow, they sleep, and they can be impersonated.",
       "The goal was an escrow that holds the funds itself, checks every payment on-chain, and releases or refunds by clear rules, so neither side has to trust the other or a person in the middle.",
