@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Reveal } from "@/components/reveal";
+import { Spotlight } from "@/components/spotlight";
 import { PERSON } from "@/lib/content";
 import "./globals.css";
 
@@ -34,6 +35,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
+        {/* the site has its own dark mode: Dark Reader leaves it alone (and stops rewriting its markup) */}
+        <meta name="darkreader-lock" />
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       </head>
       <body className="relative">
@@ -50,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         <Footer />
         <Reveal />
+        <Spotlight />
       </body>
     </html>
   );

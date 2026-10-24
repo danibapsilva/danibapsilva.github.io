@@ -210,8 +210,8 @@ export const EXPERIENCE: Job[] = [
 ];
 
 export const SKILLS = [
-  { label: "Languages", items: ["Java", "Python", "C++", "C#", "TypeScript", "JavaScript", "SQL", "x86/x64 assembly"] },
-  { label: "Frameworks", items: ["React", "Next.js", "Node.js", "Express", "Tailwind", "Discord.py"] },
-  { label: "Data and cloud", items: ["MySQL", "MongoDB", "Redis", "AWS (EC2, S3)", "Firebase"] },
-  { label: "Systems", items: ["Windows internals", "Reverse engineering (Ghidra, IDA Pro, x64dbg)", "Linux", "Docker"] },
+  { label: "Languages", tone: "#3b6cf6", items: ["Java", "Python", "C++", "C#", "TypeScript", "JavaScript", "SQL", "x86/x64 assembly"] },
+  { label: "Frameworks", tone: "#8b5cf6", items: ["React", "Next.js", "Node.js", "Express", "Tailwind", "Discord.py"] },
+  { label: "Data and cloud", tone: "#10b981", items: ["MySQL", "MongoDB", "Redis", "AWS (EC2, S3)", "Firebase"] },
+  { label: "Systems", tone: "#f59e0b", items: ["Windows internals", "Reverse engineering (Ghidra, IDA Pro, x64dbg)", "Linux", "Docker"] },
 ];

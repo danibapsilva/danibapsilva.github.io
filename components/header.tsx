@@ -4,7 +4,8 @@ import { PERSON } from "@/lib/content";
 
 export function Header() {
   return (
-    <header className="mx-auto flex w-full max-w-[720px] items-center justify-between px-5 pt-6 pb-2 sm:px-6 sm:pt-8">
+    <header className="site-header sticky top-0 z-40">
+      <div className="mx-auto flex w-full max-w-[720px] items-center justify-between px-5 py-3 sm:px-6 sm:py-4">
       <Link href="/" className="flex items-center gap-2.5 rounded-md font-medium" aria-label={`${PERSON.name}, home`}>
         <span className="grid h-8 w-8 place-items-center rounded-lg border border-line font-mono text-[12px] font-semibold tracking-tight">
           DS
@@ -23,6 +24,7 @@ export function Header() {
         </a>
         <ThemeToggle />
       </nav>
+      </div>
     </header>
   );
 }

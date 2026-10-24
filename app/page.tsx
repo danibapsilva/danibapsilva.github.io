@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Arrow } from "@/components/arrow";
 import { Glyph } from "@/components/glyph";
 import { SectionLabel } from "@/components/section-label";
-import { EXPERIENCE, PERSON, SKILLS, STATS, WORK } from "@/lib/content";
+import { SkillsMarquee } from "@/components/skills-marquee";
+import { EXPERIENCE, PERSON, STATS, WORK } from "@/lib/content";
 
 const LINKS = [
   { label: "GitHub", href: PERSON.links.github },
@@ -130,20 +131,7 @@ export default function Home() {
 
       <section className="py-10">
         <SectionLabel n="03">Tools I use</SectionLabel>
-        <dl className="reveal space-y-4">
-          {SKILLS.map((s) => (
-            <div key={s.label} className="grid gap-2 sm:grid-cols-[8.5rem_1fr]">
-              <dt className="pt-1 text-[14px] text-faint">{s.label}</dt>
-              <dd className="flex flex-wrap gap-1.5">
-                {s.items.map((item) => (
-                  <span key={item} className="chip">
-                    {item}
-                  </span>
-                ))}
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <SkillsMarquee />
       </section>
 
       <section className="reveal py-10">
