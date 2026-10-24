@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { PERSON } from "@/lib/content";
+import { NEW_TAB } from "@/lib/links";
 
 export function Header() {
   return (
@@ -19,7 +20,7 @@ export function Header() {
         <Link href="/#experience" className="rounded-md px-2.5 py-1.5 transition-colors hover:text-ink">
           Experience
         </Link>
-        <a href={PERSON.links.resume} className="rounded-md px-2.5 py-1.5 transition-colors hover:text-ink">
+        <a href={PERSON.links.resume} {...NEW_TAB} className="rounded-md px-2.5 py-1.5 transition-colors hover:text-ink">
           Resume
         </a>
         <ThemeToggle />

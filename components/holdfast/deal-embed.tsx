@@ -48,7 +48,7 @@ export function DealEmbed({ deal, now }: { deal: Deal; now: number }) {
         </Field>
         {deal.deposit && (
           <Field label="Deposit address" wide>
-            <a href={deal.deposit.url} target="_blank" rel="noreferrer" className="hf-link font-mono text-[12.5px]">
+            <a href={deal.deposit.url} target="_blank" rel="noopener noreferrer" className="hf-link font-mono text-[12.5px]">
               {short(deal.deposit.value)}
             </a>
             <span className="text-faint"> · this deal&apos;s own address</span>

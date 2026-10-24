@@ -5,6 +5,7 @@ import { Glyph } from "@/components/glyph";
 import { SectionLabel } from "@/components/section-label";
 import { SkillsMarquee } from "@/components/skills-marquee";
 import { EXPERIENCE, PERSON, STATS, WORK } from "@/lib/content";
+import { NEW_TAB, newTabIfWeb } from "@/lib/links";
 
 const LINKS = [
   { label: "GitHub", href: PERSON.links.github },
@@ -31,6 +32,7 @@ export default function Home() {
         <div className="mt-8 flex flex-wrap items-center gap-2">
           <a
             href={PERSON.links.resume}
+            {...NEW_TAB}
             className="group inline-flex items-center gap-1.5 rounded-full bg-ink px-4.5 py-2.5 text-[14px] font-medium text-bg transition-transform hover:-translate-y-0.5"
           >
             Resume
@@ -40,6 +42,7 @@ export default function Home() {
             <a
               key={l.label}
               href={l.href}
+              {...newTabIfWeb(l.href)}
               className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/60 px-4 py-2.5 text-[14px] backdrop-blur transition-colors hover:border-[color-mix(in_srgb,var(--accent)_45%,var(--line))] hover:text-accent"
             >
               {l.label}
@@ -144,6 +147,7 @@ export default function Home() {
             </a>
             <a
               href={PERSON.links.linkedin}
+              {...NEW_TAB}
               className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-4 py-2.5 text-[14px] hover:text-accent"
             >
               LinkedIn

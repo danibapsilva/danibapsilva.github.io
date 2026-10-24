@@ -1,3 +1,4 @@
+import { NEW_TAB } from "@/lib/links";
 import { PERSON } from "@/lib/content";
 
 export function Footer() {
@@ -8,10 +9,10 @@ export function Footer() {
           {PERSON.name}, {PERSON.place}
         </p>
         <p className="flex gap-4">
-          <a href={PERSON.links.github} className="hover:text-ink">
+          <a href={PERSON.links.github} {...NEW_TAB} className="hover:text-ink">
             GitHub
           </a>
-          <a href={PERSON.links.linkedin} className="hover:text-ink">
+          <a href={PERSON.links.linkedin} {...NEW_TAB} className="hover:text-ink">
             LinkedIn
           </a>
           <a href={`mailto:${PERSON.links.email}`} className="hover:text-ink">

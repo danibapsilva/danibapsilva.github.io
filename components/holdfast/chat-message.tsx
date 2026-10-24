@@ -37,7 +37,7 @@ export function ChatMessage({ who, at, tone, links, children, grouped }: Props) 
         {links && links.length > 0 && (
           <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-[13px]">
             {links.map((l) => (
-              <a key={l.url} href={l.url} target="_blank" rel="noreferrer" className="hf-link">
+              <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="hf-link">
                 {l.label}
               </a>
             ))}

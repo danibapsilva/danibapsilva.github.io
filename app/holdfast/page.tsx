@@ -50,11 +50,11 @@ export default function HoldfastPage() {
           <p className="mt-8 max-w-[720px] text-[13.5px] leading-relaxed text-muted">
             Holdfast is the public, test-network version of an escrow system I run privately. It refuses to start on
             any network but Sepolia, and its dollar,{" "}
-            <a href={TUSD_CONTRACT_URL} target="_blank" rel="noreferrer" className="hf-link">
+            <a href={TUSD_CONTRACT_URL} target="_blank" rel="noopener noreferrer" className="hf-link">
               tUSD
             </a>
             , has no value. Read the{" "}
-            <a href={HOLDFAST_REPO} target="_blank" rel="noreferrer" className="hf-link">
+            <a href={HOLDFAST_REPO} target="_blank" rel="noopener noreferrer" className="hf-link">
               source on GitHub
             </a>{" "}
             or{" "}

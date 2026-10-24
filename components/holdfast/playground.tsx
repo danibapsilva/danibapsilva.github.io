@@ -264,7 +264,7 @@ export function Playground() {
               <p className="mx-auto mt-2 max-w-sm text-[14px] leading-relaxed text-muted">
 It runs on a small server of mine and should be back soon. Meanwhile, the code and a narrated example trade are
                 in{" "}
-                <a href={HOLDFAST_REPO} target="_blank" rel="noreferrer" className="hf-link">
+                <a href={HOLDFAST_REPO} target="_blank" rel="noopener noreferrer" className="hf-link">
                   the repository
                 </a>
                 .

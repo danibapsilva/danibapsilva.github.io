@@ -122,7 +122,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <a
               href={w.demo.source}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-4 py-2 text-[14px] hover:text-accent"
             >
               Source
