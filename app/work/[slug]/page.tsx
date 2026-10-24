@@ -37,7 +37,13 @@ export const generateStaticParams = () => WORK.map((w) => ({ slug: w.slug }));
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const w = WORK.find((x) => x.slug === slug);
-  return w ? { title: w.title, description: w.blurb, openGraph: { title: w.title, description: w.blurb } } : {};
+  return w
+    ? {
+        title: w.title,
+        description: w.blurb,
+        openGraph: { title: w.title, description: w.blurb, images: [{ url: "/og/site.png", width: 1200, height: 630 }] },
+      }
+    : {};
 }
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {

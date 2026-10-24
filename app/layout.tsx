@@ -11,13 +11,22 @@ const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 const SITE = "https://danibapsilva.github.io";
+const SITE_CARD = "/og/site.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),
   title: { default: `${PERSON.name}`, template: `%s · ${PERSON.name}` },
   description: PERSON.intro,
-  openGraph: { type: "website", url: SITE, title: PERSON.name, description: PERSON.intro, siteName: PERSON.name },
-  twitter: { card: "summary", title: PERSON.name, description: PERSON.intro },
+  // the card LinkedIn, iMessage, and Slack show for a link to the site
+  openGraph: {
+    type: "website",
+    url: SITE,
+    title: PERSON.name,
+    description: PERSON.intro,
+    siteName: PERSON.name,
+    images: [{ url: SITE_CARD, width: 1200, height: 630, alt: `${PERSON.name}: ${PERSON.intro}` }],
+  },
+  twitter: { card: "summary_large_image", title: PERSON.name, description: PERSON.intro, images: [SITE_CARD] },
   icons: { icon: "/favicon.svg" },
 };
 

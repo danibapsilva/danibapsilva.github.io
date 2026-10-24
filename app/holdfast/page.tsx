@@ -6,10 +6,18 @@ import { HOLDFAST_REPO, TUSD_CONTRACT_URL } from "@/lib/holdfast";
 
 const TONE = "#10b981"; // the escrow project's color
 
+const DESCRIPTION =
+  "Run a real escrow trade on Ethereum's Sepolia test network: pay, watch it confirm, and release, with a bot on the other side. No wallet needed.";
+
 export const metadata: Metadata = {
   title: "Holdfast: live escrow demo",
-  description:
-    "Run a real escrow trade on Ethereum's Sepolia test network: pay, watch it confirm, and release, with a bot on the other side. No wallet needed.",
+  description: DESCRIPTION,
+  openGraph: {
+    title: "Holdfast: live escrow demo",
+    description: DESCRIPTION,
+    images: [{ url: "/og/holdfast.png", width: 1200, height: 630, alt: "The Holdfast playground: a released trade" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/og/holdfast.png"] },
 };
 
 const FACTS = ["No wallet or install", "Real Sepolia transactions", "Test dollars with no value"];
